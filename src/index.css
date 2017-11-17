@@ -1,0 +1,35 @@
+body {
+    background: black;
+    color: white;
+    font-family: sans-serif;
+}
+
+.row {
+    clear: both;
+}
+
+.cell {
+    width: 90px;
+    height: 90px;
+    float: left;
+    border-radius: 90px;
+    margin: 1px;
+    cursor: pointer;
+    border: 1px solid black;
+}
+
+.cell.on {
+    background: -webkit-radial-gradient( 10px 10px, ellipse cover, #9e9e9e 0%,#0e0e0e 100% );
+}
+
+.cell.on:hover {
+    background: -webkit-radial-gradient( 10px 10px, ellipse cover, #fefefe 0%,#0e0e0e 100% );
+}
+
+.cell.off {
+    background: -webkit-radial-gradient( 40px 40px, ellipse cover, #555555 0%,#000000 80% );
+}
+
+.cell.off:hover {
+    background: -webkit-radial-gradient( 50px 50px, ellipse cover, #888888 0%,#000000 80% );
+}
