@@ -17,18 +17,21 @@ const array2d = ( x, y, fill ) => Array( x ).fill( fill ).map( _ => Array( y ).f
 
 // Single cell in the game.
 const Cell = props => (
-    <span className={"cell " + ( props.game[ props.line ][ props.col ] ? "on" : "off" )}></span>
+    <span
+      className={"cell " + ( props.game[ props.line ][ props.col ] ? "on" : "off" )}
+      onClick={ () => props.onClick( props.line, props.col )}>
+    </span>
 );
 
 // Row of cells in the game.
 const Row = props => (
     <div className="row">
-      {times( 5 ).map( n => <Cell key={n} line={props.line} col={n} game={props.game} /> )}
+      {times( 5 ).map( n => <Cell key={n} line={props.line} col={n} game={props.game} onClick={props.onClick} /> )}
     </div>
 );
 
 // The main board.
-const Board = props => times( 5 ).map( n => <Row key={n} line={n} game={props.game} /> );
+const Board = props => times( 5 ).map( n => <Row key={n} line={n} game={props.game} onClick={props.onClick} /> );
 
 // Toggle a single cell.
 const toggle = ( game, x, y ) => game[ x ][ y ] = !game[ x ][ y ];
@@ -38,8 +41,8 @@ const makeMove = ( game, x, y ) => {
     if ( x > 0 ) toggle( game, x - 1, y );
     if ( y > 0 ) toggle( game, x, y - 1 );
     toggle( game, x, y );
-    if ( x < 5 ) toggle( game, x + 1, y );
-    if ( y < 5 ) toggle( game, x, y + 1 );
+    if ( x < 4 ) toggle( game, x + 1, y );
+    if ( y < 4 ) toggle( game, x, y + 1 );
     return game;
 }
 
@@ -55,9 +58,13 @@ class Game extends React.Component {
         };
     }
 
+    gameMove( x, y ) {
+        this.setState( { game: makeMove( this.state.game, x, y ) } );
+    }
+
     render() {
         return (
-            <Board game={this.state.game}/>
+            <Board game={this.state.game} onClick={( x, y ) => this.gameMove( x, y )} />
         );
     }
 }
