@@ -40,7 +40,11 @@ const Moves = props => (
 );
 
 // The main board.
-const Board = props => times( GRID_SIZE ).map( n => <Row key={n} line={n} game={props.game} onClick={props.onClick} /> );
+const Board = props => (
+    <div className="board">
+      {times( GRID_SIZE ).map( n => <Row key={n} line={n} game={props.game} onClick={props.onClick} /> )}
+    </div>
+);
 
 // Toggle a single cell.
 const toggle = ( game, x, y ) => game[ x ][ y ] = !game[ x ][ y ];
@@ -77,7 +81,7 @@ class Game extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="game">
               <Moves moves={this.state.moves} />
               <Board game={this.state.game} onClick={( x, y ) => this.gameMove( x, y )} />
             </div>
