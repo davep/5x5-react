@@ -15,6 +15,7 @@ const GRID_SIZE = 5;
 
 const times   = max => Array( max ).fill( 0 ).map( ( _, i ) => i );
 const array2d = ( x, y, fill ) => Array( x ).fill( fill ).map( _ => Array( y ).fill( fill ) );
+const flatten = a => a.reduce( ( a, b ) => a.concat( b ), [] );
 
 //////////////////////////////////////////////////////////////////////
 // Main components.
@@ -36,7 +37,7 @@ const Row = props => (
 
 // Shows the number of moves.
 const Status = props => (
-    <p>Moves: {props.moves}</p>
+    <p>Moves: {props.moves}. On: {props.on}. Off: 0.</p>
 );
 
 // The main board.
@@ -65,6 +66,9 @@ const initialGameState = () => makeMove( array2d( GRID_SIZE, GRID_SIZE, false ),
 // Show the reset button.
 const Reset = props => <button onClick={() => props.reset()}>Reset</button>;
 
+// Count how many cells are turned on.
+const countOn = game => flatten( game ).reduce( ( total, cell ) => total + ( cell ? 1 : 0 ), 0 );
+
 // Holds/displays the game state.
 class Game extends React.Component {
 
@@ -74,28 +78,32 @@ class Game extends React.Component {
 
         this.state = {
             game: initialGameState(),
-            moves: 0
+            moves: 0,
+            on: countOn( initialGameState() )
         };
     }
 
     gameMove( x, y ) {
+        const game = makeMove( this.state.game, x, y );
         this.setState( {
-            game: makeMove( this.state.game, x, y ),
-            moves: this.state.moves + 1
+            game: game,
+            moves: this.state.moves + 1,
+            on: countOn( game )
         } );
     }
 
     reset() {
         this.setState( {
             game: initialGameState(),
-            moves: 0
+            moves: 0,
+            on: 0
         } );
     }
 
     render() {
         return (
             <div className="game">
-              <Status moves={this.state.moves} />
+              <Status moves={this.state.moves} on={this.state.on} />
               <Board game={this.state.game} onClick={( x, y ) => this.gameMove( x, y )} />
               <div className="buttons">
                 <Reset game={this.state.game} reset={() => this.reset()} />
