@@ -7,6 +7,10 @@ import ReactDOM from "react-dom";
 import "./index.css";
 
 //////////////////////////////////////////////////////////////////////
+// Constants.
+const GRID_SIZE = 5;
+
+//////////////////////////////////////////////////////////////////////
 // Utility functions.
 
 const times   = max => Array( max ).fill( 0 ).map( ( _, i ) => i );
@@ -26,16 +30,17 @@ const Cell = props => (
 // Row of cells in the game.
 const Row = props => (
     <div className="row">
-      {times( 5 ).map( n => <Cell key={n} line={props.line} col={n} game={props.game} onClick={props.onClick} /> )}
+      {times( GRID_SIZE ).map( n => <Cell key={n} line={props.line} col={n} game={props.game} onClick={props.onClick} /> )}
     </div>
 );
 
-const Score = props => (
+// Shows the number of moves.
+const Moves = props => (
     <p>Moves: {props.moves}</p>
 );
 
 // The main board.
-const Board = props => times( 5 ).map( n => <Row key={n} line={n} game={props.game} onClick={props.onClick} /> );
+const Board = props => times( GRID_SIZE ).map( n => <Row key={n} line={n} game={props.game} onClick={props.onClick} /> );
 
 // Toggle a single cell.
 const toggle = ( game, x, y ) => game[ x ][ y ] = !game[ x ][ y ];
@@ -45,8 +50,8 @@ const makeMove = ( game, x, y ) => {
     if ( x > 0 ) toggle( game, x - 1, y );
     if ( y > 0 ) toggle( game, x, y - 1 );
     toggle( game, x, y );
-    if ( x < 4 ) toggle( game, x + 1, y );
-    if ( y < 4 ) toggle( game, x, y + 1 );
+    if ( x < ( GRID_SIZE - 1 ) ) toggle( game, x + 1, y );
+    if ( y < ( GRID_SIZE - 1 ) ) toggle( game, x, y + 1 );
     return game;
 }
 
@@ -58,7 +63,7 @@ class Game extends React.Component {
         super( props );
 
         this.state = {
-            game: makeMove( array2d( 5, 5, false ), 2, 2 ),
+            game: makeMove( array2d( GRID_SIZE, GRID_SIZE, false ), 2, 2 ),
             moves: 0
         };
     }
@@ -73,7 +78,7 @@ class Game extends React.Component {
     render() {
         return (
             <div>
-              <Score moves={this.state.moves} />
+              <Moves moves={this.state.moves} />
               <Board game={this.state.game} onClick={( x, y ) => this.gameMove( x, y )} />
             </div>
         );
