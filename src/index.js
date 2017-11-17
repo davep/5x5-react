@@ -37,7 +37,7 @@ const Row = props => (
 
 // Shows the number of moves.
 const Status = props => (
-    <p>Moves: {props.moves}. On: {props.on}. Off: 0.</p>
+    <p>Moves: {props.moves}. On: {props.on}. Off: {props.off}.</p>
 );
 
 // The main board.
@@ -103,7 +103,7 @@ class Game extends React.Component {
     render() {
         return (
             <div className="game">
-              <Status moves={this.state.moves} on={this.state.on} />
+              <Status moves={this.state.moves} on={this.state.on} off={( GRID_SIZE * GRID_SIZE ) - this.state.on} />
               <Board game={this.state.game} onClick={( x, y ) => this.gameMove( x, y )} />
               <div className="buttons">
                 <Reset game={this.state.game} reset={() => this.reset()} />
