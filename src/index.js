@@ -30,6 +30,10 @@ const Row = props => (
     </div>
 );
 
+const Score = props => (
+    <p>Moves: {props.moves}</p>
+);
+
 // The main board.
 const Board = props => times( 5 ).map( n => <Row key={n} line={n} game={props.game} onClick={props.onClick} /> );
 
@@ -54,17 +58,24 @@ class Game extends React.Component {
         super( props );
 
         this.state = {
-            game: makeMove( array2d( 5, 5, false ), 2, 2 )
+            game: makeMove( array2d( 5, 5, false ), 2, 2 ),
+            moves: 0
         };
     }
 
     gameMove( x, y ) {
-        this.setState( { game: makeMove( this.state.game, x, y ) } );
+        this.setState( {
+            game: makeMove( this.state.game, x, y ),
+            moves: this.state.moves + 1
+        } );
     }
 
     render() {
         return (
-            <Board game={this.state.game} onClick={( x, y ) => this.gameMove( x, y )} />
+            <div>
+              <Score moves={this.state.moves} />
+              <Board game={this.state.game} onClick={( x, y ) => this.gameMove( x, y )} />
+            </div>
         );
     }
 }
