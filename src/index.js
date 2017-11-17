@@ -53,7 +53,7 @@ const makeMove = ( game, x, y ) => {
     if ( x < ( GRID_SIZE - 1 ) ) toggle( game, x + 1, y );
     if ( y < ( GRID_SIZE - 1 ) ) toggle( game, x, y + 1 );
     return game;
-}
+};
 
 // Holds/displays the game state.
 class Game extends React.Component {
