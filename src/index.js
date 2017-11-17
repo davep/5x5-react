@@ -35,7 +35,7 @@ const Row = props => (
 );
 
 // Shows the number of moves.
-const Moves = props => (
+const Status = props => (
     <p>Moves: {props.moves}</p>
 );
 
@@ -95,7 +95,7 @@ class Game extends React.Component {
     render() {
         return (
             <div className="game">
-              <Moves moves={this.state.moves} />
+              <Status moves={this.state.moves} />
               <Board game={this.state.game} onClick={( x, y ) => this.gameMove( x, y )} />
               <div className="buttons">
                 <Reset game={this.state.game} reset={() => this.reset()} />
