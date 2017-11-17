@@ -59,6 +59,12 @@ const makeMove = ( game, x, y ) => {
     return game;
 };
 
+// Return an initial game state.
+const initialGameState = () => makeMove( array2d( GRID_SIZE, GRID_SIZE, false ), 2, 2 );
+
+// Show the reset button.
+const Reset = props => <button onClick={() => props.reset()}>Reset</button>;
+
 // Holds/displays the game state.
 class Game extends React.Component {
 
@@ -67,7 +73,7 @@ class Game extends React.Component {
         super( props );
 
         this.state = {
-            game: makeMove( array2d( GRID_SIZE, GRID_SIZE, false ), 2, 2 ),
+            game: initialGameState(),
             moves: 0
         };
     }
@@ -79,11 +85,21 @@ class Game extends React.Component {
         } );
     }
 
+    reset() {
+        this.setState( {
+            game: initialGameState(),
+            moves: 0
+        } );
+    }
+
     render() {
         return (
             <div className="game">
               <Moves moves={this.state.moves} />
               <Board game={this.state.game} onClick={( x, y ) => this.gameMove( x, y )} />
+              <div className="buttons">
+                <Reset game={this.state.game} reset={() => this.reset()} />
+              </div>
             </div>
         );
     }

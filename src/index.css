@@ -9,6 +9,18 @@ body {
     display: table;
 }
 
+.buttons {
+    text-align: center;
+}
+
+button {
+    font-size: 120%;
+    color: white;
+    background: -webkit-radial-gradient( 50% 50%, circle cover, #4e4e4e 0%,#0e0e0e 100% );
+    cursor: pointer;
+    border: none;
+}
+
 .board {
     border: 1px solid #555555;
     display: inline-block;
