@@ -30,6 +30,19 @@ const Row = props => (
 // The main board.
 const Board = props => times( 5 ).map( n => <Row key={n} line={n} game={props.game} /> );
 
+// Toggle a single cell.
+const toggle = ( game, x, y ) => game[ x ][ y ] = !game[ x ][ y ];
+
+// Make a move on the game.
+const makeMove = ( game, x, y ) => {
+    if ( x > 0 ) toggle( game, x - 1, y );
+    if ( y > 0 ) toggle( game, x, y - 1 );
+    toggle( game, x, y );
+    if ( x < 5 ) toggle( game, x + 1, y );
+    if ( y < 5 ) toggle( game, x, y + 1 );
+    return game;
+}
+
 // Holds/displays the game state.
 class Game extends React.Component {
 
@@ -38,7 +51,7 @@ class Game extends React.Component {
         super( props );
 
         this.state = {
-            game: array2d( 5, 5, false )
+            game: makeMove( array2d( 5, 5, false ), 2, 2 )
         };
     }
 
