@@ -60,27 +60,31 @@ const makeMove = ( game, x, y ) => {
     return game;
 };
 
-// Return an initial game state.
-const initialGameState = () => makeMove( array2d( GRID_SIZE, GRID_SIZE, false ), 2, 2 );
-
 // Show the reset button.
 const Reset = props => <button onClick={() => props.reset()}>Reset</button>;
 
 // Count how many cells are turned on.
 const countOn = game => flatten( game ).reduce( ( total, cell ) => total + ( cell ? 1 : 0 ), 0 );
 
+// Return an initial game.
+const initialGame = () => makeMove( array2d( GRID_SIZE, GRID_SIZE, false ), 2, 2 );
+
+// Return an initial game state.
+const initialGameState = () => {
+    let game = initialGame();
+    return {
+        game: game,
+        moves: 0,
+        on: countOn( game )
+    };
+};
+
 // Holds/displays the game state.
 class Game extends React.Component {
 
     constructor( props ) {
-
         super( props );
-
-        this.state = {
-            game: initialGameState(),
-            moves: 0,
-            on: countOn( initialGameState() )
-        };
+        this.state = initialGameState();
     }
 
     gameMove( x, y ) {
@@ -93,11 +97,7 @@ class Game extends React.Component {
     }
 
     reset() {
-        this.setState( {
-            game: initialGameState(),
-            moves: 0,
-            on: 0
-        } );
+        this.setState( initialGameState() );
     }
 
     render() {
