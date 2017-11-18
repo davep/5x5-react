@@ -115,9 +115,7 @@ class Game extends React.Component {
 
 // Main app wrapper.
 const App = props => (
-    <div>
-      <Game />
-    </div>
+    <Game />
 );
 
 //////////////////////////////////////////////////////////////////////
