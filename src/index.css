@@ -33,13 +33,26 @@ button {
 }
 
 .cell {
-    width: 12vw;
-    height: 12vw;
     float: left;
-    border-radius: 12vw;
     margin: 1px;
     cursor: pointer;
     border: 1px solid black;
+}
+
+@media all and (orientation:portrait) {
+    .cell {
+        width: 12vw;
+        height: 12vw;
+        border-radius: 12vw;
+    }
+}
+
+@media all and (orientation:landscape) {
+    .cell {
+        width: 12vh;
+        height: 12vh;
+        border-radius: 12vh;
+    }
 }
 
 .cell.on {
