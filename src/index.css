@@ -56,11 +56,11 @@ button {
 }
 
 .cell.on {
-    background: radial-gradient( farthest-corner at 10px 10px, #9e9e9e 0%, #0e0e0e 100% );
+    background: radial-gradient( farthest-corner at 40px 40px, #9e9e9e 0%, #0e0e0e 100% );
 }
 
 .cell.on:hover {
-    background: radial-gradient( farthest-corner at 10px 10px, #fefefe 0%, #0e0e0e 100% );
+    background: radial-gradient( farthest-corner at 40px 40px, #fefefe 0%, #0e0e0e 100% );
 }
 
 .cell.off {
