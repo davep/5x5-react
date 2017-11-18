@@ -68,5 +68,5 @@ button {
 }
 
 .cell.off:hover {
-    background: -webkit-radial-gradient( 50px 50px, ellipse cover, #888888 0%,#000000 80% );
+    background: -webkit-radial-gradient( 40px 40px, ellipse cover, #888888 0%,#000000 80% );
 }
