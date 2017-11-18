@@ -61,7 +61,17 @@ const makeMove = ( game, x, y ) => {
 };
 
 // Show the reset button.
-const Reset = props => <button onClick={() => props.reset()}>Reset</button>;
+class Reset extends React.Component {
+
+    reset() {
+        this.props.reset();
+        this.refs.reset.blur();
+    }
+
+    render() {
+        return <button ref="reset" onClick={() => this.reset()}>Reset</button>;
+    }
+}
 
 // Count how many cells are turned on.
 const countOn = game => flatten( game ).reduce( ( total, cell ) => total + ( cell ? 1 : 0 ), 0 );
