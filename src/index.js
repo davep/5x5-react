@@ -35,7 +35,7 @@ const Row = props => (
     </div>
 );
 
-// Shows the number of moves.
+// Shows the status of the current game.
 const Status = props => (
     <p>Moves: {props.moves}. On: {props.on}. Off: {props.off}.</p>
 );
