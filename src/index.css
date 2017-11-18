@@ -70,3 +70,11 @@ button {
 .cell.off:hover {
     background: radial-gradient( farthest-corner at 40px 40px, #888888 0%, #000000 80% );
 }
+
+.cell.no-click {
+    cursor: not-allowed;
+}
+
+.cell.no-click:hover {
+    background: radial-gradient( farthest-corner at 40px 40px, #9e9e9f 0%, #0e0e0f 100% );
+}

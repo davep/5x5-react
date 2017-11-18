@@ -23,7 +23,7 @@ const flatten = a => a.reduce( ( a, b ) => a.concat( b ), [] );
 // Single cell in the game.
 const Cell = props => (
     <span
-      className={"cell " + ( props.game[ props.line ][ props.col ] ? "on" : "off" )}
+      className={"cell " + ( props.game[ props.line ][ props.col ] ? "on" : "off" ) + ( props.filled ? " no-click" : "" )}
       onClick={ () => props.onClick( props.line, props.col )}>
     </span>
 );
@@ -31,19 +31,22 @@ const Cell = props => (
 // Row of cells in the game.
 const Row = props => (
     <div className="row">
-      {times( GRID_SIZE ).map( n => <Cell key={n} line={props.line} col={n} game={props.game} onClick={props.onClick} /> )}
+      {times( GRID_SIZE ).map( n => <Cell key={n} line={props.line} col={n} game={props.game} filled={props.filled} onClick={props.onClick} /> )}
     </div>
 );
 
 // Shows the status of the current game.
-const Status = props => (
-    <p>Moves: {props.moves}. On: {props.on}. Off: {props.off}.</p>
-);
+const Status = props => {
+    if ( props.filled ) {
+        return <p>Grid filled in {props.moves} moves!</p>;
+    }
+    return <p>Moves: {props.moves}. On: {props.on}. Off: {props.off}.</p>;
+};
 
 // The main board.
 const Board = props => (
     <div className="board">
-      {times( GRID_SIZE ).map( n => <Row key={n} line={n} game={props.game} onClick={props.onClick} /> )}
+      {times( GRID_SIZE ).map( n => <Row key={n} line={n} game={props.game} filled={props.filled} onClick={props.onClick} /> )}
     </div>
 );
 
@@ -85,7 +88,8 @@ const initialGameState = () => {
     return {
         game: game,
         moves: 0,
-        on: countOn( game )
+        on: countOn( game ),
+        filled: false
     };
 };
 
@@ -98,12 +102,16 @@ class Game extends React.Component {
     }
 
     gameMove( x, y ) {
-        const game = makeMove( this.state.game, x, y );
-        this.setState( {
-            game: game,
-            moves: this.state.moves + 1,
-            on: countOn( game )
-        } );
+        if ( !this.state.filled ) {
+            const game = makeMove( this.state.game, x, y );
+            const on   = countOn( game );
+            this.setState( {
+                game: game,
+                moves: this.state.moves + 1,
+                on: on,
+                filled: on === ( GRID_SIZE * GRID_SIZE )
+            } );
+        }
     }
 
     reset() {
@@ -113,8 +121,8 @@ class Game extends React.Component {
     render() {
         return (
             <div className="game">
-              <Status moves={this.state.moves} on={this.state.on} off={( GRID_SIZE * GRID_SIZE ) - this.state.on} />
-              <Board game={this.state.game} onClick={( x, y ) => this.gameMove( x, y )} />
+              <Status moves={this.state.moves} on={this.state.on} off={( GRID_SIZE * GRID_SIZE ) - this.state.on} filled={this.state.filled} />
+              <Board game={this.state.game} onClick={( x, y ) => this.gameMove( x, y )} filled={this.state.filled} />
               <div className="buttons">
                 <Reset game={this.state.game} reset={() => this.reset()} />
               </div>
