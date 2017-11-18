@@ -40,41 +40,63 @@ button {
 }
 
 @media all and (orientation:portrait) {
+
     .cell {
         width: 12vw;
         height: 12vw;
         border-radius: 12vw;
     }
+
+    .cell.on {
+        background: radial-gradient( farthest-corner at 4vw 4vw, #9e9e9f 0%, #0e0e0f 100% );
+    }
+
+    .cell.on:hover {
+        background: radial-gradient( farthest-corner at 4vw 4vw, #fefeff 0%, #0e0e0f 100% );
+    }
+
+    .cell.off {
+        background: radial-gradient( farthest-corner at 4vw 4vw, #555555 0%, #000000 80% );
+    }
+
+    .cell.off:hover {
+        background: radial-gradient( farthest-corner at 4vw 4vw, #888888 0%, #000000 80% );
+    }
+
+    .cell.no-click:hover {
+        background: radial-gradient( farthest-corner at 4vw 4vw, #9e9e9f 0%, #0e0e0f 100% );
+    }
 }
 
 @media all and (orientation:landscape) {
+
     .cell {
         width: 12vh;
         height: 12vh;
         border-radius: 12vh;
     }
-}
 
-.cell.on {
-    background: radial-gradient( farthest-corner at 40px 40px, #9e9e9f 0%, #0e0e0f 100% );
-}
+    .cell.on {
+        background: radial-gradient( farthest-corner at 4vh 4vh, #9e9e9f 0%, #0e0e0f 100% );
+    }
 
-.cell.on:hover {
-    background: radial-gradient( farthest-corner at 40px 40px, #fefeff 0%, #0e0e0f 100% );
-}
+    .cell.on:hover {
+        background: radial-gradient( farthest-corner at 4vh 4vh, #fefeff 0%, #0e0e0f 100% );
+    }
 
-.cell.off {
-    background: radial-gradient( farthest-corner at 40px 40px, #555555 0%, #000000 80% );
-}
+    .cell.off {
+        background: radial-gradient( farthest-corner at 4vh 4vh, #555555 0%, #000000 80% );
+    }
 
-.cell.off:hover {
-    background: radial-gradient( farthest-corner at 40px 40px, #888888 0%, #000000 80% );
+    .cell.off:hover {
+        background: radial-gradient( farthest-corner at 4vh 4vh, #888888 0%, #000000 80% );
+    }
+
+    .cell.no-click:hover {
+        background: radial-gradient( farthest-corner at 4vh 4vh, #9e9e9f 0%, #0e0e0f 100% );
+    }
 }
 
 .cell.no-click {
     cursor: not-allowed;
-}
-
-.cell.no-click:hover {
-    background: radial-gradient( farthest-corner at 40px 40px, #9e9e9f 0%, #0e0e0f 100% );
 }
