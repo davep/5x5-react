@@ -14,7 +14,7 @@ const GRID_SIZE = 5;
 // Utility functions.
 
 const times   = max => Array( max ).fill( 0 ).map( ( _, i ) => i );
-const array2d = ( x, y, fill ) => Array( x ).fill( fill ).map( _ => Array( y ).fill( fill ) );
+const array2d = ( x, y, fill ) => Array( x ).fill( undefined ).map( _ => Array( y ).fill( fill ) );
 const flatten = a => a.reduce( ( a, b ) => a.concat( b ), [] );
 
 //////////////////////////////////////////////////////////////////////
