@@ -33,10 +33,10 @@ button {
 }
 
 .cell {
-    width: 90px;
-    height: 90px;
+    width: 12vw;
+    height: 12vw;
     float: left;
-    border-radius: 90px;
+    border-radius: 12vw;
     margin: 1px;
     cursor: pointer;
     border: 1px solid black;
