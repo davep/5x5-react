@@ -39,6 +39,10 @@ button {
     border: 1px solid black;
 }
 
+@mixin cell-gradient( $size, $start, $end ) {
+    background: radial-gradient( farthest-corner at ( $size / 3 ) ( $size / 3 ), $start, $end );
+}
+
 @mixin cell( $size ) {
 
     .cell {
@@ -48,23 +52,23 @@ button {
     }
 
     .cell.on {
-        background: radial-gradient( farthest-corner at ( $size / 3 ) ( $size / 3 ), #9e9e9f 0%, #0e0e0f 100% );
+        @include cell-gradient( $size, #9e9e9f 0%, #0e0e0f 100% );
     }
 
     .cell.on:hover {
-        background: radial-gradient( farthest-corner at ( $size / 3 ) ( $size / 3 ), #fefeff 0%, #0e0e0f 100% );
+        @include cell-gradient( $size, #fefeff 0%, #0e0e0f 100% );
     }
 
     .cell.off {
-        background: radial-gradient( farthest-corner at ( $size / 3 ) ( $size / 3 ), #555555 0%, #000000 80% );
+        @include cell-gradient( $size, #555555 0%, #000000 80% );
     }
 
     .cell.off:hover {
-        background: radial-gradient( farthest-corner at ( $size / 3 ) ( $size / 3 ), #888888 0%, #000000 80% );
+        @include cell-gradient( $size, #888888 0%, #000000 80% );
     }
 
     .cell.no-click:hover {
-        background: radial-gradient( farthest-corner at ( $size / 3 ) ( $size / 3 ), #9e9e9f 0%, #0e0e0f 100% );
+        @include cell-gradient( $size, #9e9e9f 0%, #0e0e0f 100% );
     }
 }
 
