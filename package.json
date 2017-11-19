@@ -12,6 +12,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "publish": "echo 5x5.surge.sh > build/CNAME && surge build"
+    "publish": "echo 5x5.surge.sh > build/CNAME && surge build",
+    "sass": "sass --watch src/styles/scss:src/styles/css",
+    "sass:build": "sass --update src/styles/scss:src/styles/css"
   }
 }
